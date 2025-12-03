@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestor de Tareas</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+    
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    
+    <div class="app-container">
+        <header>
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-icon"><i data-lucide="layout-dashboard"></i></div>
+                    <span>Gestor de Tareas</span>
+                </div>
+                <div class="toolbar">
+                    <button id="btn-undo" class="btn btn-ghost"><i data-lucide="rotate-ccw" width="16"></i> Deshacer</button>
+                    
+                    <button id="btn-redo" class="btn btn-ghost"><i data-lucide="rotate-cw" width="16"></i> Rehacer</button>
+                    
+                    <button id="btn-create" class="btn btn-primary"><i data-lucide="plus" width="16"></i> Nueva Tarea</button>
+                </div>
+            </div>
+        </header>
+
+        <main class="board">
+            <div class="column" id="col-pending">
+                <div class="column-header">
+                    <div class="column-dot" style="background: var(--primary)"></div>
+                    <h3>Pendiente</h3>
+                    <span class="badge" id="count-pending">0</span>
+                </div>
+                <div class="task-list"></div>
+            </div>
+
+            <div class="column" id="col-progress">
+                <div class="column-header">
+                    <div class="column-dot" style="background: var(--border-progress)"></div>
+                    <h3>En Progreso</h3>
+                    <span class="badge" id="count-progress">0</span>
+                </div>
+                <div class="task-list"></div>
+            </div>
+
+            <div class="column" id="col-completed">
+                <div class="column-header">
+                    <div class="column-dot" style="background: var(--border-completed)"></div>
+                    <h3>Completada</h3>
+                    <span class="badge" id="count-completed">0</span>
+                </div>
+                <div class="task-list"></div>
+            </div>
+        </main>
+    </div>
+
+    <div id="toast-container" class="toast-container"></div>
+
+    <div id="task-modal" class="modal-overlay">
+        <div class="modal">
+            <div class="modal-header">
+                <h2 id="modal-title" class="modal-title">Nueva Tarea</h2>
+                <button class="btn-icon" id="btn-close-modal"><i data-lucide="x"></i></button>
+            </div>
+            <form id="task-form">
+                <div class="form-group">
+                    <label class="form-label">Título</label>
+                    <input type="text" id="input-title" class="form-input" placeholder="Ej. Diseñar interfaz" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Descripción</label>
+                    <textarea id="input-desc" class="form-textarea" placeholder="Detalles..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Estado</label>
+                    <select id="input-status" class="form-select">
+                        <option value="pending">Pendiente</option>
+                        <option value="in-progress">En Progreso</option>
+                        <option value="completed">Completada</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Subtareas (Nuevas)</label>
+                    <div class="subtask-input-group">
+                        <input type="text" id="input-new-subtask" class="form-input" placeholder="Agregar paso...">
+                        <button type="button" id="btn-add-subtask-edit" class="btn btn-ghost" style="padding: 0.5rem"><i data-lucide="plus"></i></button>
+                    </div>
+                    <div id="temp-subtask-list" class="subtask-list-edit"></div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="confirm-modal" class="modal-overlay">
+        <div class="modal" style="max-width: 400px">
+            <div class="modal-header" style="margin-bottom: 1rem">
+                <h2 class="modal-title" style="color: var(--danger)">¿Eliminar tarea?</h2>
+            </div>
+            <p style="color: var(--text-muted); margin-bottom: 1.5rem">Esta acción no se puede deshacer.</p>
+            <div class="modal-footer">
+                <button id="btn-cancel-delete" class="btn btn-ghost">Cancelar</button>
+                <button id="btn-confirm-delete" class="btn btn-primary" style="background: var(--danger)">Eliminar</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
