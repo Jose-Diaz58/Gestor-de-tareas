@@ -619,9 +619,9 @@ class TaskManager {
             document.getElementById('input-desc').value = task.description;
             document.getElementById('input-status').value = task.status;
             
-            // Rellenar subtareas temporales con las subtareas existentes
-            // NOTA: Para un proyecto simple, solo copiamos los textos
-            this.tempSubtasks = (task.subtasks || []).map(s => s.text); 
+            // === ¡LÍNEA ELIMINADA PARA EVITAR DUPLICACIÓN! ===
+            // ESTA LÍNEA HACÍA QUE LAS SUBTAREAS EXISTENTES SE AÑADIERAN COMO NUEVAS AL GUARDAR:
+            // this.tempSubtasks = (task.subtasks || []).map(s => s.text); 
 
         } else {
             this.editingId = null;
