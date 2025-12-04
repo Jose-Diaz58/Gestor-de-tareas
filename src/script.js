@@ -1,9 +1,20 @@
+// ===================================================================
+// 1. INICIALIZACIÓN DE SUPABASE — VERSIÓN FINAL (SIN ERRORES)
+// ===================================================================
 
-import { createClient } from '@supabase/supabase-js'
+// IMPORT CORRECTO PARA NAVEGADOR (FUNCIONA EN VERCEL)
+import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm";
 
-const supabaseUrl = 'https://beouwknuzqfqmwefnmgw.supabase.co'
-const supabaseKey = process.env.SUPABASE_KEY
-const supabase = createClient(supabaseUrl, supabaseKey)
+// VARIABLES DE ENTORNO INYECTADAS DESDE index.html EN VERCEL
+// EN LOCAL, PUEDES PONERLAS DIRECTAS
+const SUPABASE_URL =
+    window.SUPABASE_URL_ENV || "https://beouwknuzqfqmwefnmgw.supabase.co";
+const SUPABASE_ANON_KEY =
+    window.SUPABASE_ANON_KEY_ENV ||
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJlb3V3a251enFmcW13ZWZubWd3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjQ2ODQ5MDgsImV4cCI6MjA4MDI2MDkwOH0.mXPdVoue0C_ggHYsh3nJ6Tf7NZgTWSGLxcTkXeWVTLE";
+
+// CLIENTE SUPABASE
+export const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 class Nodo {
     constructor(data) {
